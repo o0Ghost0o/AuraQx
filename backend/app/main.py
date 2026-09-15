@@ -16,12 +16,26 @@ from app.routers.demo_router import router as demo_router
 from app.routers.notion_router import router as notion_router
 from app.routers.preauth import router as preauth_router
 
+from contextlib import asynccontextmanager
+from app.core.tasks import start_dramatiq_worker, stop_dramatiq_worker
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Iniciar Dramatiq background task worker
+    start_dramatiq_worker()
+    yield
+    # Detener Dramatiq background task worker
+    stop_dramatiq_worker()
+
+
 app = FastAPI(
     title=settings.app_name,
     version=settings.app_version,
     description="Agente de Pre-Autorización Quirúrgica en Tiempo Real (Reto 1 HackIAthon Viamatica/ADEN)",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 # Configuración de CORS

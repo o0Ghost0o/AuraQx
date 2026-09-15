@@ -93,6 +93,7 @@ source = { editable = "." }
 dependencies = [
     { name = "bcrypt" },
     { name = "docling" },
+    { name = "dramatiq" },
     { name = "fastapi", extra = ["standard"] },
     { name = "httpx" },
     { name = "notion-client" },
@@ -104,12 +105,14 @@ dependencies = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "python-multipart" },
+    { name = "reportlab" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "bcrypt", specifier = ">=5.0.0" },
     { name = "docling", specifier = ">=2.127.0" },
+    { name = "dramatiq", specifier = ">=2.2.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.141.1" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "notion-client", specifier = ">=3.1.0" },
@@ -121,6 +124,7 @@ requires-dist = [
     { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest-asyncio", specifier = ">=1.4.0" },
     { name = "python-multipart", specifier = ">=0.0.32" },
+    { name = "reportlab", specifier = ">=5.0.1" },
 ]
 
 [[package]]
@@ -641,6 +645,15 @@ standard = [
     { name = "torchvision" },
     { name = "typer" },
     { name = "websockets" },
+]
+
+[[package]]
+name = "dramatiq"
+version = "2.2.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/14/6d/d056a8ba251c216da054fc5db9ad7931bfb9ab28851e8b86acd770ce8867/dramatiq-2.2.1.tar.gz", hash = "sha256:f9fbbd2feea27b3fa4085446242a24d86f78288b20c78a93f9f0bdbd7d908cd5", size = 109994, upload-time = "2026-09-02T07:55:09.979Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8c/13/0550ff585ade7b423e2ecaac29c4ab88673a58ae92ef25b6629089a2b92c/dramatiq-2.2.1-py3-none-any.whl", hash = "sha256:4e2466d07d5a1c4910b49944e5b45704c123b82325384e1319f6d08d94559c46", size = 127754, upload-time = "2026-09-02T07:55:08.423Z" },
 ]
 
 [[package]]
@@ -2482,6 +2495,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/cb/51/37a194df7707f92f33173260ba7b221d4ec376419a53babaec50019a2804/regex-2026.9.10-cp315-cp315t-win32.whl", hash = "sha256:5bef622850cf760154719d4e0d74b0a855962432995168e250069899ae12fe8f", size = 274780, upload-time = "2026-09-09T21:00:14.003Z" },
     { url = "https://files.pythonhosted.org/packages/77/12/3227a52970d90908b230f15b2c86df903f49ac72c9eedf4f6e8b5bb5e1a7/regex-2026.9.10-cp315-cp315t-win_amd64.whl", hash = "sha256:07b45ba5c94b8fcb30cb6c56a11f715c57533a3017964504322ea52690a27b72", size = 283936, upload-time = "2026-09-09T21:00:16.275Z" },
     { url = "https://files.pythonhosted.org/packages/f3/bc/c567c5a61671f04d30e83f20b496b465432879196574d051007285576205/regex-2026.9.10-cp315-cp315t-win_arm64.whl", hash = "sha256:f70b9f0e39c2dba1d9da6bf7ef7c377cad7277f8440e9a69be05ede529ff024c", size = 283747, upload-time = "2026-09-09T21:00:19.113Z" },
+]
+
+[[package]]
+name = "reportlab"
+version = "5.0.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "charset-normalizer" },
+    { name = "pillow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/4a/51/dbe28534ae12c852f61be91f039f343305fd1f34f1c66b8de75afae7a525/reportlab-5.0.1.tar.gz", hash = "sha256:ebd13154be1c8515e665de70bd2d303ae9ddc3ef47e44afd5116441ca0283a26", size = 3945711, upload-time = "2026-08-20T13:48:16.461Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/db/cb/dacbc268cb68d0428ea2cbd85266195a9ab3e677449589ddae59bd7542ac/reportlab-5.0.1-py3-none-any.whl", hash = "sha256:1c36e6bb0e71780c72331eba60da7f602e8d4389a8723825af71342e49d791e8", size = 1957258, upload-time = "2026-08-20T13:48:14.026Z" },
 ]
 
 [[package]]

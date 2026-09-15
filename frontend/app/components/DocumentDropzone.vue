@@ -97,12 +97,14 @@ const onFileChange = (e: Event) => {
             Arrastra el Informe Médico Quirúrgico (PDF o Imagen)
           </p>
           <p class="text-xs text-slate-400">
-            Procesado con <strong class="text-cyan-400">IBM Docling</strong> para extracción de CIE-10, cirugía, hospital y estudios
+            Procesado con <strong class="text-cyan-400">IBM Docling</strong> + <strong class="text-emerald-400">Dramatiq Worker</strong> para extracción off-thread sin latencia
           </p>
         </div>
 
         <div class="flex items-center gap-2 mt-1 text-[11px] text-slate-500 font-mono">
           <span>Formatos: PDF, PNG, JPG</span>
+          <span>•</span>
+          <span>Cola Asíncrona Dramatiq</span>
           <span>•</span>
           <span>Auditoría Instantánea</span>
         </div>

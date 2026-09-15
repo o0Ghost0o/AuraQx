@@ -38,13 +38,17 @@ async def analyze_preauthorization(
     return resolution
 
 
+import asyncio
+from app.core.tasks import extract_and_analyze_document_task, broker, results_backend
+
+
 @router.post("/analyze-upload", response_model=PreAuthResolution)
 async def analyze_uploaded_document(
     file: UploadFile = File(...),
     patient_id: Optional[str] = Form(None),
     current_user: UserProfile = Depends(get_current_user),
 ):
-    """Recibe un archivo PDF escaneado o digital de informe médico, lo procesa con IBM Docling y emite la resolución."""
+    """Recibe un archivo PDF escaneado o digital de informe médico, lo procesa off-thread con motor multimodal y emite la resolución sin bloquear el servidor."""
     suffix = os.path.splitext(file.filename or "report.pdf")[1]
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         content = await file.read()
@@ -52,14 +56,13 @@ async def analyze_uploaded_document(
         tmp_path = tmp.name
 
     try:
-        # Extraer con IBM Docling
-        raw_text = docling_extractor.extract_text_from_file(tmp_path)
+        # Extraer texto en un hilo de trabajo separado (evita congelar el event loop de FastAPI)
+        raw_text = await asyncio.to_thread(docling_extractor.extract_text_from_file, tmp_path)
         report = docling_extractor.parse_clinical_report(raw_text, fallback_patient_id=patient_id)
 
         # Consultar póliza
         policy = await notion_bridge.get_policy_by_patient_id(report.patient_id)
         if not policy:
-            # Si el ID extraído no está en las pólizas demo, intentar con la primera activa
             all_policies = await notion_bridge.list_all_policies()
             if all_policies:
                 policy = all_policies[0]
@@ -79,6 +82,54 @@ async def analyze_uploaded_document(
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
+
+
+@router.post("/dramatiq/dispatch")
+async def dispatch_dramatiq_task(
+    file: UploadFile = File(...),
+    patient_id: Optional[str] = Form(None),
+    current_user: UserProfile = Depends(get_current_user),
+):
+    """Encola el procesamiento del documento en un worker en segundo plano de Dramatiq."""
+    suffix = os.path.splitext(file.filename or "report.pdf")[1]
+    # Guardar en directorio de uploads permanente temporal
+    temp_dir = tempfile.gettempdir()
+    saved_path = os.path.join(temp_dir, f"dramatiq_{file.filename}")
+    content = await file.read()
+    with open(saved_path, "wb") as f:
+        f.write(content)
+
+    message = extract_and_analyze_document_task.send(saved_path, patient_id)
+    return {
+        "task_id": message.message_id,
+        "status": "QUEUED",
+        "actor": "extract_and_analyze_document_task",
+        "message": "Tarea encolada exitosamente en el worker de Dramatiq."
+    }
+
+
+@router.get("/dramatiq/result/{message_id}")
+async def get_dramatiq_result(
+    message_id: str,
+    current_user: UserProfile = Depends(get_current_user),
+):
+    """Consulta el estado o resultado de una tarea procesada por el actor de Dramatiq."""
+    try:
+        from dramatiq import Message
+        msg = Message(
+            queue_name="default",
+            actor_name="extract_and_analyze_document_task",
+            args=(),
+            kwargs={},
+            options={},
+            message_id=message_id,
+            message_timestamp=0,
+        )
+        result = results_backend.get_result(msg, block=False)
+        return {"task_id": message_id, "status": "COMPLETED", "result": result}
+    except Exception as e:
+        return {"task_id": message_id, "status": "PENDING", "detail": "Procesando en segundo plano..."}
+
 
 
 @router.post("/stream")
