@@ -8,7 +8,7 @@
 ## 📌 Entregables Oficiales del HackIAthon
 
 - **Enlace Público del Agente Funcional**: `https://auraqx.trycloudflare.com` *(o vía `make tunnel`)*
-- **Repositorio Git**: [GitHub: AuraQx](https://github.com/pedrocarreras/pre_clasificacion)
+- **Repositorio Git**: [GitHub: AuraQx](https://github.com/o0Ghost0o/AuraQx)
 - **Correo de Envío**: `hackiathon@viamatica.com`
 
 ---
@@ -126,8 +126,8 @@ En la barra superior de la aplicación, el jurado puede hacer clic en cualquiera
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone https://github.com/pedrocarreras/pre_clasificacion.git
-cd pre_clasificacion
+git clone https://github.com/o0Ghost0o/AuraQx.git
+cd AuraQx
 ```
 
 ### 2. Iniciar con un Solo Comando
