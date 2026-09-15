@@ -1,0 +1,36 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Pedro Carreras", email = "pcarreras@vertexdc.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "bcrypt>=5.0.0",
+    "docling>=2.127.0",
+    "fastapi[standard]>=0.141.1",
+    "httpx>=0.28.1",
+    "notion-client>=3.1.0",
+    "openai>=3.14.0",
+    "pydantic>=2.13.5",
+    "pydantic-settings>=2.15.0",
+    "pyjwt>=2.14.0",
+    "pypdf>=6.18.1",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "python-multipart>=0.0.32",
+]
+
+[project.scripts]
+backend = "backend:main"
+
+[build-system]
+requires = ["uv_build>=0.12.13,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+asyncio_mode = "auto"
+

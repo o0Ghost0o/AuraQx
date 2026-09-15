@@ -1,0 +1,27 @@
+HOSPITAL METROPOLITANO DE QUITO
+DEPARTAMENTO DE CIRUGÍA GENERAL Y LAPAROSCÓPICA
+INFORME MÉDICO PREQUIRÚRGICO DE PRE-AUTORIZACIÓN
+
+FECHA: 2026-09-15
+PACIENTE: María Carmen Mendoza
+CÉDULA DE IDENTIDAD: 0928374102
+EDAD: 45 años | SEXO: Femenino
+MÉDICO TRATANTE: Dr. Fernando Morales (Cirugía Laparoscópica)
+
+DIAGNÓSTICO CIE-10:
+K80.2 - Calculosis de la vesícula biliar sin colecistitis (Colelitiasis sintomática)
+
+PROCEDIMIENTO QUIRÚRGICO SOLICITADO:
+Colecistectomía laparoscópica (Código CPT: 47562)
+PRIORIDAD: Electiva Programada
+
+RESUMEN CLÍNICO:
+Paciente femenina de 45 años con historia de cuadros repetitivos de dolor tipo cólico en hipocondrio derecho tras ingesta de alimentos colecistoquinéticos. Al examen físico abdomen blando, doloroso a la palpación profunda en punto cístico, Murphy negativo.
+
+ESTUDIOS Y DOCUMENTACIÓN ADJUNTA:
+1. Ecografía de Abdomen Superior: Litos múltiples de 6 a 8 mm en vesícula biliar. Pared de 2 mm. Vía biliar intra y extrahepática de calibre normal (colédoco 4 mm).
+2. Biometría Hemática y Tiempos de Coagulación (TP/TTP): Hemoglobina 13.8 g/dL, Leucocitos 6,800, Plaquetas 240,000, TP 11.8s, TTP 29s.
+3. Valoración Cardiológica y Riesgo Quirúrgico: ECG en ritmo sinusal normal. Clasificación ASA II, Riesgo Goldman Clase I. Apto para cirugía bajo anestesia general.
+4. Presupuesto Quirúrgico Detallado: USD 2,800.00 (Incluye derechos de sala laparoscópica, insumos descartables, anestesia y 1 día de hospitalización).
+
+Firma del Especialista: Dr. Fernando Morales / Reg. MSP 89412

@@ -1,0 +1,119 @@
+[
+  {
+    "policy_number": "POL-ORO-8921",
+    "patient_id": "0928374102",
+    "patient_name": "María Carmen Mendoza",
+    "plan_tier": "Plan Oro",
+    "start_date": "2025-03-01",
+    "status": "Activa",
+    "annual_deductible": 250.0,
+    "deductible_met": 100.0,
+    "coverage_percent_in_network": 80.0,
+    "coverage_percent_out_network": 60.0,
+    "network_hospitals": [
+      "Hospital Metropolitano",
+      "Clínica Guayaquil",
+      "Hospital VozAndes",
+      "Clínica Kennedy"
+    ],
+    "carencia_rules": [
+      {
+        "category": "vesicula_hernias",
+        "required_months": 10,
+        "description": "Cirugía de vesícula, litiasis y hernias requieren 10 meses continuos de cobertura."
+      },
+      {
+        "category": "maternidad_cesarea",
+        "required_months": 10,
+        "description": "Cobertura de maternidad y parto por cesárea requiere 10 meses de antigüedad."
+      },
+      {
+        "category": "emergencias",
+        "required_months": 0,
+        "description": "Emergencias vitales y accidentes amparados desde el primer día (0 días de carencia)."
+      }
+    ],
+    "exclusions": [
+      "cirugía estética o cosmética no reconstructiva",
+      "tratamientos bariátricos no autorizados",
+      "cirugías experimentales sin respaldo científico"
+    ]
+  },
+  {
+    "policy_number": "POL-PLATA-4011",
+    "patient_id": "1719283041",
+    "patient_name": "Carlos Andrés Silva",
+    "plan_tier": "Plan Plata",
+    "start_date": "2025-07-15",
+    "status": "Activa",
+    "annual_deductible": 300.0,
+    "deductible_met": 0.0,
+    "coverage_percent_in_network": 75.0,
+    "coverage_percent_out_network": 55.0,
+    "network_hospitals": [
+      "Hospital Metropolitano",
+      "Clínica Kennedy",
+      "Hospital Alcívar"
+    ],
+    "carencia_rules": [
+      {
+        "category": "vesicula_hernias",
+        "required_months": 10,
+        "description": "Hernias y vesícula requieren 10 meses."
+      }
+    ],
+    "exclusions": [
+      "procedimientos estéticos"
+    ]
+  },
+  {
+    "policy_number": "POL-ESMERALDA-7722",
+    "patient_id": "0911223344",
+    "patient_name": "Valeria Sofía Ramos",
+    "plan_tier": "Plan Esmeralda",
+    "start_date": "2026-05-10",
+    "status": "Activa",
+    "annual_deductible": 150.0,
+    "deductible_met": 0.0,
+    "coverage_percent_in_network": 85.0,
+    "coverage_percent_out_network": 65.0,
+    "network_hospitals": [
+      "Hospital Metropolitano",
+      "Clínica de la Mujer",
+      "Clínica Guayaquil"
+    ],
+    "carencia_rules": [
+      {
+        "category": "maternidad_cesarea",
+        "required_months": 10,
+        "description": "Maternidad y cesáreas exigen 10 meses de carencia estricta."
+      }
+    ],
+    "exclusions": []
+  },
+  {
+    "policy_number": "POL-ORO-5510",
+    "patient_id": "1705544332",
+    "patient_name": "Juan Diego Morales",
+    "plan_tier": "Plan Oro",
+    "start_date": "2026-08-30",
+    "status": "Activa",
+    "annual_deductible": 250.0,
+    "deductible_met": 0.0,
+    "coverage_percent_in_network": 80.0,
+    "coverage_percent_out_network": 60.0,
+    "network_hospitals": [
+      "Hospital Metropolitano",
+      "Clínica Guayaquil",
+      "Hospital VozAndes"
+    ],
+    "carencia_rules": [
+      {
+        "category": "emergencias",
+        "required_months": 0,
+        "description": "Urgencias quirúrgicas amparadas desde el día 1."
+      }
+    ],
+    "exclusions": []
+  }
+]

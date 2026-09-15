@@ -1,0 +1,172 @@
+[
+  {
+    "id": "case-alfa",
+    "badge": "Pre-Aprobación Exitosa",
+    "case_title": "Colecistectomía Laparoscópica (Carencia Cumplida y Docs Completos)",
+    "description": "Paciente femenina de 45 años con cólico biliar a repetición y colelitiasis confirmada por ecografía. Póliza con 18 meses de vigencia (carencia de 10m cumplida). Todos los estudios adjuntos.",
+    "report": {
+      "patient_name": "María Carmen Mendoza",
+      "patient_id": "0928374102",
+      "patient_age": 45,
+      "patient_gender": "F",
+      "hospital_name": "Hospital Metropolitano",
+      "treating_physician": "Dr. Fernando Morales (Cirujano General y Laparoscópico)",
+      "diagnosis_icd10": "K80.2 - Calculosis de la vesícula biliar sin colecistitis",
+      "procedure_name": "Colecistectomía laparoscópica",
+      "procedure_cpt": "47562",
+      "urgency": "ELECTIVA",
+      "request_date": "2026-09-15",
+      "estimated_cost": 2800.0,
+      "clinical_summary": "Paciente con cuadro de dolor en hipocondrio derecho postprandial de 4 meses de evolución. Ecografía evidencia múltiples litos vesiculares de 6 a 8 mm con pared fina de 2 mm. Vía biliar normal de 4 mm. Se indica colecistectomía programada.",
+      "attachments": [
+        {
+          "name": "Ecografia_Abdominal_Mendoza.pdf",
+          "doc_type": "ecografia",
+          "is_present": true,
+          "notes": "Litos móviles, sin signos de colecistitis aguda."
+        },
+        {
+          "name": "Laboratorio_Preq_Mendoza.pdf",
+          "doc_type": "laboratorio",
+          "is_present": true,
+          "notes": "Hb 13.8, Plaquetas 240,000, TP 11.8s (100%), TTP 29s."
+        },
+        {
+          "name": "Riesgo_Cardiologico_Mendoza.pdf",
+          "doc_type": "riesgo_quirurgico",
+          "is_present": true,
+          "notes": "ECG ritmo sinusal, riesgo quirúrgico cardiovascular Goldman I (Bajo)."
+        },
+        {
+          "name": "Presupuesto_Hospital_Metropolitano.pdf",
+          "doc_type": "presupuesto",
+          "is_present": true,
+          "notes": "Presupuesto paquete laparoscópico USD 2,800.00."
+        }
+      ]
+    }
+  },
+  {
+    "id": "case-beta",
+    "badge": "Documentos Faltantes",
+    "case_title": "Hernioplastia Inguinal (Carencia Cumplida, Requiere Faltantes)",
+    "description": "Paciente masculino de 48 años con hernia inguinal derecha reducible. Póliza con 14 meses (carencia cumplida). Sin embargo, faltan la valoración cardiológica obligatoria por su edad y la ecografía de pared abdominal.",
+    "report": {
+      "patient_name": "Carlos Andrés Silva",
+      "patient_id": "1719283041",
+      "patient_age": 48,
+      "patient_gender": "M",
+      "hospital_name": "Clínica Kennedy",
+      "treating_physician": "Dr. Roberto Baquerizo (Cirugía General)",
+      "diagnosis_icd10": "K40.9 - Hernia inguinal unilateral o no especificada, sin obstrucción ni gangrena",
+      "procedure_name": "Hernioplastia inguinal con colocación de malla protésica",
+      "procedure_cpt": "49505",
+      "urgency": "ELECTIVA",
+      "request_date": "2026-09-15",
+      "estimated_cost": 2100.0,
+      "clinical_summary": "Paciente refiere tumoración inguinal derecha reducible con maniobras de Valsalva de 6 meses de evolución. Examen físico compatible con hernia indirecta reducible. Se solicita pre-autorización para reparación con malla de polipropileno.",
+      "attachments": [
+        {
+          "name": "Presupuesto_Clinica_Kennedy.pdf",
+          "doc_type": "presupuesto",
+          "is_present": true,
+          "notes": "USD 2,100 incluye malla protésica y derechos de sala."
+        },
+        {
+          "name": "Biometria_Hematica_Silva.pdf",
+          "doc_type": "laboratorio",
+          "is_present": true,
+          "notes": "Leucocitos 7,200, Plaquetas 210,000, Coagulación dentro de rango."
+        }
+      ]
+    }
+  },
+  {
+    "id": "case-gamma",
+    "badge": "Carencia Insuficiente",
+    "case_title": "Parto por Cesárea Programada (Período de Carencia no Cumplido)",
+    "description": "Paciente femenina de 29 años, primigesta con 38 semanas, cesárea indicada por desproporción céfalo-pélvica. Póliza contratada hace solo 4 meses (la póliza estipula 10 meses de carencia para maternidad).",
+    "report": {
+      "patient_name": "Valeria Sofía Ramos",
+      "patient_id": "0911223344",
+      "patient_age": 29,
+      "patient_gender": "F",
+      "hospital_name": "Hospital Metropolitano",
+      "treating_physician": "Dra. Cecilia Alvear (Ginecología y Obstetricia)",
+      "diagnosis_icd10": "O82 - Parto único por cesárea",
+      "procedure_name": "Cesárea electiva con salpingectomía o monitorización neonatal",
+      "procedure_cpt": "59510",
+      "urgency": "ELECTIVA",
+      "request_date": "2026-09-15",
+      "estimated_cost": 3200.0,
+      "clinical_summary": "Gestante de 38.4 semanas con estrechez pélvica y producto en podálica. Se programa cesárea electiva. Adjunta ecografía de tercer trimestre y exámenes completos.",
+      "attachments": [
+        {
+          "name": "Informe_Obstetrico_Alvear.pdf",
+          "doc_type": "informe_obstetrico",
+          "is_present": true,
+          "notes": "Indicación por DCP y podálica."
+        },
+        {
+          "name": "Ecografia_Obstetrica_3T.pdf",
+          "doc_type": "ecografia",
+          "is_present": true,
+          "notes": "Biometría fetal acorde a 38 semanas."
+        },
+        {
+          "name": "Laboratorios_Ramos.pdf",
+          "doc_type": "laboratorio",
+          "is_present": true,
+          "notes": "Pruebas completas prequirúrgicas."
+        },
+        {
+          "name": "Presupuesto_Maternidad_Metro.pdf",
+          "doc_type": "presupuesto",
+          "is_present": true,
+          "notes": "USD 3,200.00."
+        }
+      ]
+    }
+  },
+  {
+    "id": "case-delta",
+    "badge": "Emergencia Quirúrgica Vital",
+    "case_title": "Apendicectomía de Urgencia (Carencia 0 Días por Urgencia Vital)",
+    "description": "Paciente masculino de 34 años ingresado por emergencia con abdomen agudo compatible con apendicitis aguda perforada. Póliza contratada hace solo 15 días. Cobertura inmediata concedida por cláusula de emergencia vital (0 carencia).",
+    "report": {
+      "patient_name": "Juan Diego Morales",
+      "patient_id": "1705544332",
+      "patient_age": 34,
+      "patient_gender": "M",
+      "hospital_name": "Hospital Metropolitano",
+      "treating_physician": "Dr. Marcelo Pazmiño (Cirujano de Guardia)",
+      "diagnosis_icd10": "K35.2 - Apendicitis aguda con peritonitis generalizada / perforación",
+      "procedure_name": "Apendicectomía laparoscópica de urgencia y lavado peritoneal",
+      "procedure_cpt": "44970",
+      "urgency": "EMERGENCIA_VITAL",
+      "request_date": "2026-09-15",
+      "estimated_cost": 3100.0,
+      "clinical_summary": "Paciente acude a emergencias con dolor periumbilical migrado a fosa ilíaca derecha de 24h, fiebre de 38.8°C, signo de Blumberg francamente positivo y leucocitosis de 18,500 con 85% neutrófilos. Se indica intervención quirúrgica de urgencia inmediata.",
+      "attachments": [
+        {
+          "name": "Nota_Ingreso_Emergencia_Pazmiño.pdf",
+          "doc_type": "informe_urgencia",
+          "is_present": true,
+          "notes": "Alvarado score 9/10, peritonitis localizada."
+        },
+        {
+          "name": "Laboratorio_Urgente_Morales.pdf",
+          "doc_type": "laboratorio",
+          "is_present": true,
+          "notes": "Leucocitosis 18,500, coagulación normal."
+        },
+        {
+          "name": "Presupuesto_Urgencia_Metro.pdf",
+          "doc_type": "presupuesto",
+          "is_present": true,
+          "notes": "Presupuesto estimado de urgencia USD 3,100.00."
+        }
+      ]
+    }
+  }
+]
