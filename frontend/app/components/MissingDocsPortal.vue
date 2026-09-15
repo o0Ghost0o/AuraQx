@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { AlertTriangle, UploadCloud, FileCheck, ArrowRight, ShieldAlert, Sparkles } from 'lucide-vue-next'
+import { AlertTriangle, UploadCloud, FileCheck, ArrowRight, ShieldAlert, Sparkles, Download } from 'lucide-vue-next'
 
 const props = defineProps<{
   missingDocs: any[]
@@ -69,9 +69,20 @@ const handleQuickResolve = (docType: string, title: string) => {
       </div>
     </div>
 
-    <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 flex items-center gap-2">
-      <Sparkles class="w-4 h-4 shrink-0 text-amber-400" />
-      <span>Al adjuntar todos los documentos faltantes, el agente recalculará la resolución de inmediato a <strong>PRE-APROBADO</strong> y emitirá el voucher en Notion.</span>
+    <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <Sparkles class="w-4 h-4 shrink-0 text-amber-400" />
+        <span>Al adjuntar todos los documentos faltantes, el agente recalculará la resolución de inmediato a <strong>PRE-APROBADO</strong>.</span>
+      </div>
+      <a
+        href="/case_packages/case-beta/05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf"
+        download="05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf"
+        class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 text-[10px] font-mono shrink-0 transition-all"
+        title="Descargar documento faltante de prueba"
+      >
+        <Download class="w-3 h-3" />
+        <span>Descargar Documento Faltante</span>
+      </a>
     </div>
   </div>
 </template>

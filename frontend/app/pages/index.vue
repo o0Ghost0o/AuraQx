@@ -93,6 +93,33 @@ const handleDoclingUpload = (res: any) => {
   ]
 }
 
+// Procesar documento directamente desde el paquete descargable
+const handleProcessDocFromPackage = async (docUrl: string, fileName: string) => {
+  try {
+    isAnalyzing.value = true
+    errorAlert.value = null
+    const fileRes = await fetch(docUrl)
+    const blob = await fileRes.blob()
+    const file = new File([blob], fileName, { type: 'application/pdf' })
+
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('patient_id', currentReport.value.patient_id)
+
+    const res = await fetchWithAuth<any>('/api/preauth/analyze-upload', {
+      method: 'POST',
+      body: formData,
+    })
+
+    handleDoclingUpload(res)
+  } catch (err: any) {
+    console.error('Error processing document from package:', err)
+    errorAlert.value = err.data?.detail || 'Error procesando documento del paquete'
+  } finally {
+    isAnalyzing.value = false
+  }
+}
+
 // Ejecutar pipeline agéntico con streaming SSE
 const runPreauthAnalysis = async () => {
   isAnalyzing.value = true
@@ -231,6 +258,12 @@ const handleResolveMissingDoc = async (docType: string, fileName: string) => {
           </div>
           <DocumentDropzone @file-uploaded="handleDoclingUpload" />
         </GlassCard>
+
+        <!-- Expediente del Caso & Paquete Descargable (.ZIP) -->
+        <CasePackageViewer
+          :selected-case="selectedCase"
+          @process-doc="handleProcessDocFromPackage"
+        />
 
         <!-- Formulario Clínico Parametrizable -->
         <GlassCard>

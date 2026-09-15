@@ -4,6 +4,51 @@
     "badge": "Pre-Aprobación Exitosa",
     "case_title": "Colecistectomía Laparoscópica (Carencia Cumplida y Docs Completos)",
     "description": "Paciente femenina de 45 años con cólico biliar a repetición y colelitiasis confirmada por ecografía. Póliza con 18 meses de vigencia (carencia de 10m cumplida). Todos los estudios adjuntos.",
+    "package": {
+      "zip_url": "/case_packages/AuraQx_Caso_Alfa_Colecistectomia_Mendoza.zip",
+      "zip_filename": "AuraQx_Caso_Alfa_Colecistectomia_Mendoza.zip",
+      "folder": "case-alfa",
+      "primary_pdf_url": "/case_packages/case-alfa/01_Informe_Quirurgico_Colecistectomia.pdf",
+      "documents": [
+        {
+          "title": "Informe Quirúrgico Oficial",
+          "filename": "01_Informe_Quirurgico_Colecistectomia.pdf",
+          "url": "/case_packages/case-alfa/01_Informe_Quirurgico_Colecistectomia.pdf",
+          "doc_type": "informe_medico",
+          "is_primary": true
+        },
+        {
+          "title": "Certificado de Póliza de Salud (Notion)",
+          "filename": "02_Certificado_Poliza_Asegurado.pdf",
+          "url": "/case_packages/case-alfa/02_Certificado_Poliza_Asegurado.pdf",
+          "doc_type": "poliza"
+        },
+        {
+          "title": "Ecografía Abdominal y Hepatobiliar",
+          "filename": "03_Ecografia_Abdominal.pdf",
+          "url": "/case_packages/case-alfa/03_Ecografia_Abdominal.pdf",
+          "doc_type": "ecografia"
+        },
+        {
+          "title": "Biometría Hemática y Coagulación (TP/TTP)",
+          "filename": "04_Biometria_y_Coagulacion.pdf",
+          "url": "/case_packages/case-alfa/04_Biometria_y_Coagulacion.pdf",
+          "doc_type": "laboratorio"
+        },
+        {
+          "title": "Valoración Cardiológica (Goldman I)",
+          "filename": "05_Valoracion_Cardiologica_Riesgo_Quirurgico.pdf",
+          "url": "/case_packages/case-alfa/05_Valoracion_Cardiologica_Riesgo_Quirurgico.pdf",
+          "doc_type": "riesgo_quirurgico"
+        },
+        {
+          "title": "Presupuesto Quirúrgico Hospitalario",
+          "filename": "06_Presupuesto_Hospitalario_Detallado.pdf",
+          "url": "/case_packages/case-alfa/06_Presupuesto_Hospitalario_Detallado.pdf",
+          "doc_type": "presupuesto"
+        }
+      ]
+    },
     "report": {
       "patient_name": "María Carmen Mendoza",
       "patient_id": "0928374102",
@@ -51,6 +96,52 @@
     "badge": "Documentos Faltantes",
     "case_title": "Hernioplastia Inguinal (Carencia Cumplida, Requiere Faltantes)",
     "description": "Paciente masculino de 48 años con hernia inguinal derecha reducible. Póliza con 14 meses (carencia cumplida). Sin embargo, faltan la valoración cardiológica obligatoria por su edad y la ecografía de pared abdominal.",
+    "package": {
+      "zip_url": "/case_packages/AuraQx_Caso_Beta_Hernioplastia_Silva.zip",
+      "zip_filename": "AuraQx_Caso_Beta_Hernioplastia_Silva.zip",
+      "folder": "case-beta",
+      "primary_pdf_url": "/case_packages/case-beta/01_Informe_Quirurgico_Hernioplastia.pdf",
+      "missing_doc_sample": {
+        "title": "Valoración Cardiológica Requerida (Subsanación)",
+        "filename": "05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf",
+        "url": "/case_packages/case-beta/05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf",
+        "doc_type": "riesgo_quirurgico"
+      },
+      "documents": [
+        {
+          "title": "Informe Quirúrgico Oficial",
+          "filename": "01_Informe_Quirurgico_Hernioplastia.pdf",
+          "url": "/case_packages/case-beta/01_Informe_Quirurgico_Hernioplastia.pdf",
+          "doc_type": "informe_medico",
+          "is_primary": true
+        },
+        {
+          "title": "Certificado de Póliza de Salud (Notion)",
+          "filename": "02_Certificado_Poliza_Asegurado.pdf",
+          "url": "/case_packages/case-beta/02_Certificado_Poliza_Asegurado.pdf",
+          "doc_type": "poliza"
+        },
+        {
+          "title": "Biometría Hemática",
+          "filename": "03_Biometria_Hematica.pdf",
+          "url": "/case_packages/case-beta/03_Biometria_Hematica.pdf",
+          "doc_type": "laboratorio"
+        },
+        {
+          "title": "Presupuesto Quirúrgico Proforma",
+          "filename": "04_Presupuesto_Quirurgico.pdf",
+          "url": "/case_packages/case-beta/04_Presupuesto_Quirurgico.pdf",
+          "doc_type": "presupuesto"
+        },
+        {
+          "title": "Estudio Faltante para Subir (Test)",
+          "filename": "05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf",
+          "url": "/case_packages/case-beta/05_FALTANTE_A_SUBIR_Riesgo_Cardiologico_Silva.pdf",
+          "doc_type": "riesgo_quirurgico",
+          "is_missing_solution": true
+        }
+      ]
+    },
     "report": {
       "patient_name": "Carlos Andrés Silva",
       "patient_id": "1719283041",
@@ -86,6 +177,45 @@
     "badge": "Carencia Insuficiente",
     "case_title": "Parto por Cesárea Programada (Período de Carencia no Cumplido)",
     "description": "Paciente femenina de 29 años, primigesta con 38 semanas, cesárea indicada por desproporción céfalo-pélvica. Póliza contratada hace solo 4 meses (la póliza estipula 10 meses de carencia para maternidad).",
+    "package": {
+      "zip_url": "/case_packages/AuraQx_Caso_Gamma_Cesarea_Ramos.zip",
+      "zip_filename": "AuraQx_Caso_Gamma_Cesarea_Ramos.zip",
+      "folder": "case-gamma",
+      "primary_pdf_url": "/case_packages/case-gamma/01_Informe_Obstetrico_Cesarea.pdf",
+      "documents": [
+        {
+          "title": "Informe Obstétrico y Criterio Quirúrgico",
+          "filename": "01_Informe_Obstetrico_Cesarea.pdf",
+          "url": "/case_packages/case-gamma/01_Informe_Obstetrico_Cesarea.pdf",
+          "doc_type": "informe_medico",
+          "is_primary": true
+        },
+        {
+          "title": "Certificado de Póliza de Salud (Notion)",
+          "filename": "02_Certificado_Poliza_Asegurado.pdf",
+          "url": "/case_packages/case-gamma/02_Certificado_Poliza_Asegurado.pdf",
+          "doc_type": "poliza"
+        },
+        {
+          "title": "Ecografía Obstétrica 3T (Podálica)",
+          "filename": "03_Ecografia_Obstetrica_Tercer_Trimestre.pdf",
+          "url": "/case_packages/case-gamma/03_Ecografia_Obstetrica_Tercer_Trimestre.pdf",
+          "doc_type": "ecografia"
+        },
+        {
+          "title": "Laboratorios Prequirúrgicos y Serología",
+          "filename": "04_Laboratorios_Prequirurgicos.pdf",
+          "url": "/case_packages/case-gamma/04_Laboratorios_Prequirurgicos.pdf",
+          "doc_type": "laboratorio"
+        },
+        {
+          "title": "Presupuesto Maternidad Hospitalario",
+          "filename": "05_Presupuesto_Maternidad.pdf",
+          "url": "/case_packages/case-gamma/05_Presupuesto_Maternidad.pdf",
+          "doc_type": "presupuesto"
+        }
+      ]
+    },
     "report": {
       "patient_name": "Valeria Sofía Ramos",
       "patient_id": "0911223344",
@@ -133,6 +263,39 @@
     "badge": "Emergencia Quirúrgica Vital",
     "case_title": "Apendicectomía de Urgencia (Carencia 0 Días por Urgencia Vital)",
     "description": "Paciente masculino de 34 años ingresado por emergencia con abdomen agudo compatible con apendicitis aguda perforada. Póliza contratada hace solo 15 días. Cobertura inmediata concedida por cláusula de emergencia vital (0 carencia).",
+    "package": {
+      "zip_url": "/case_packages/AuraQx_Caso_Delta_Apendicectomia_Morales.zip",
+      "zip_filename": "AuraQx_Caso_Delta_Apendicectomia_Morales.zip",
+      "folder": "case-delta",
+      "primary_pdf_url": "/case_packages/case-delta/01_Nota_Ingreso_Emergencia_Apendicectomia.pdf",
+      "documents": [
+        {
+          "title": "Nota de Ingreso de Emergencia Vital",
+          "filename": "01_Nota_Ingreso_Emergencia_Apendicectomia.pdf",
+          "url": "/case_packages/case-delta/01_Nota_Ingreso_Emergencia_Apendicectomia.pdf",
+          "doc_type": "informe_medico",
+          "is_primary": true
+        },
+        {
+          "title": "Certificado de Póliza de Salud (Notion)",
+          "filename": "02_Certificado_Poliza_Asegurado.pdf",
+          "url": "/case_packages/case-delta/02_Certificado_Poliza_Asegurado.pdf",
+          "doc_type": "poliza"
+        },
+        {
+          "title": "Laboratorio Urgente (18,500 Leucocitos)",
+          "filename": "03_Laboratorio_Urgente_Leucocitosis.pdf",
+          "url": "/case_packages/case-delta/03_Laboratorio_Urgente_Leucocitosis.pdf",
+          "doc_type": "laboratorio"
+        },
+        {
+          "title": "Presupuesto Quirófano Urgente",
+          "filename": "04_Presupuesto_Emergencia.pdf",
+          "url": "/case_packages/case-delta/04_Presupuesto_Emergencia.pdf",
+          "doc_type": "presupuesto"
+        }
+      ]
+    },
     "report": {
       "patient_name": "Juan Diego Morales",
       "patient_id": "1705544332",

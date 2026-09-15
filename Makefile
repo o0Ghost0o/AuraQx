@@ -1,4 +1,4 @@
-.PHONY: help install dev dev-backend dev-frontend test build docker-up docker-down tunnel clean
+.PHONY: help install packages dev dev-backend dev-frontend test build docker-up docker-down tunnel clean
 
 SHELL := /usr/bin/env bash
 
@@ -8,6 +8,7 @@ help:
 	@echo "=========================================================="
 	@echo "Comandos disponibles:"
 	@echo "  make install        Instala dependencias de backend (uv) y frontend (bun)"
+	@echo "  make packages       Genera los paquetes descargables de PDFs y ZIPs para cada caso"
 	@echo "  make dev            Inicia concurrentemente backend (:8000) y frontend (:3000)"
 	@echo "  make dev-backend    Inicia sólo el backend FastAPI con uv"
 	@echo "  make dev-frontend   Inicia sólo el frontend Nuxt 4 con bun"
@@ -24,6 +25,12 @@ install:
 	@cd backend && uv sync
 	@echo "📦 Instalando dependencias de Frontend con bun..."
 	@cd frontend && bun install
+	@echo "📑 Generando paquetes descargables de documentos clínicos..."
+	@cd backend && uv run python scripts/generate_case_packages.py
+
+packages:
+	@echo "📑 Generando paquetes descargables de documentos clínicos (.PDF y .ZIP)..."
+	@cd backend && uv run python scripts/generate_case_packages.py
 
 dev:
 	@echo "🚀 Iniciando AuraQx (Backend :8000 + Frontend :3000)..."
