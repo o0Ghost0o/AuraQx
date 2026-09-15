@@ -7,7 +7,7 @@
 
 ## 📌 Entregables Oficiales del HackIAthon
 
-- **Enlace Público del Agente Funcional**: `https://surgiauth-ai.trycloudflare.com` *(o vía `./deploy/tunnel_public.sh`)*
+- **Enlace Público del Agente Funcional**: `https://surgiauth-ai.trycloudflare.com` *(o vía `make tunnel`)*
 - **Repositorio Git**: [GitHub: SurgiAuth-AI](https://github.com/pedrocarreras/pre_clasificacion)
 - **Correo de Envío**: `hackiathon@viamatica.com`
 
@@ -132,9 +132,9 @@ cd pre_clasificacion
 
 ### 2. Iniciar con un Solo Comando
 ```bash
-./deploy/run_local.sh
+make dev
 ```
-El script levantará concurrentemente:
+El comando levantará concurrentemente:
 - **Backend FastAPI**: `http://127.0.0.1:8000` (Docs en `/docs`)
 - **Frontend Nuxt 4 (PWA)**: `http://localhost:3000`
 
@@ -143,14 +143,15 @@ El script levantará concurrentemente:
 ## 🌐 Generar Enlace Público para el Hackathon
 Para generar un túnel HTTPS público para los evaluadores en 5 segundos:
 ```bash
-./deploy/tunnel_public.sh
+make tunnel
 ```
 
 ---
 
 ## 🐳 Ejecución con Docker Compose
 ```bash
-docker-compose up --build
+make docker-up
+# O alternativamente: docker compose up --build
 ```
 
 ---
@@ -159,8 +160,8 @@ docker-compose up --build
 
 Para ejecutar la suite completa de pruebas unitarias y de integración del backend:
 ```bash
-cd backend
-uv run pytest -v
+make test
+# O alternativamente: cd backend && uv run pytest -v
 ```
 
 Tests validados:
