@@ -11,7 +11,7 @@ from app.core.rules_engine import audit_preauthorization
 from app.models.clinical import MedicalReport
 from app.models.resolution import PreAuthResolution, ResolutionStatus, TelemetryEvent
 
-logger = logging.getLogger("surgiauth.agent")
+logger = logging.getLogger("auraqx.agent")
 
 
 class PreAuthAgent:

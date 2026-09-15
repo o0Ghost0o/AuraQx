@@ -18,7 +18,7 @@ const notionMirrorRef = ref<any>(null)
           Monitor de Pólizas y Pre-Autorizaciones en <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Notion DB</span>
         </h1>
         <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-          SurgiAuth AI opera de forma bidireccional: consulta las pólizas y reglas de carencia contractuales directamente desde Notion y escribe al instante las resoluciones, códigos de pre-aprobación y montos cubiertos.
+          AuraQx opera de forma bidireccional: consulta las pólizas y reglas de carencia contractuales directamente desde Notion y escribe al instante las resoluciones, códigos de pre-aprobación y montos cubiertos.
         </p>
       </div>
     </div>

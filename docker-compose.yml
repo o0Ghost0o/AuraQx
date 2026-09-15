@@ -8,7 +8,7 @@ services:
     environment:
       - AUTH_USERNAME=auditor_clinico
       - AUTH_PASSWORD=hackiathon2026
-      - JWT_SECRET_KEY=surgiauth_jwt_master_secret_key_viamatica_aden_2026
+      - JWT_SECRET_KEY=auraqx_jwt_master_secret_key_viamatica_aden_2026
       - OPENAI_BASE_URL=https://api.together.xyz/v1
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       - OPENAI_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo

@@ -6,7 +6,7 @@ from typing import Any, Dict, List, Optional
 
 from app.models.clinical import DocumentAttachment, MedicalReport, UrgencyLevel
 
-logger = logging.getLogger("surgiauth.docling")
+logger = logging.getLogger("auraqx.docling")
 
 
 class DoclingMultimodalExtractor:

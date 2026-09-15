@@ -100,7 +100,7 @@ const totalAmountAuthorized = computed(() =>
         <Clock class="w-5 h-5 text-cyan-400" />
         <div>
           <h3 class="text-sm font-bold text-white">Impacto Operativo: Tiempos de Respuesta</h3>
-          <p class="text-xs text-slate-400">Comparativa de flujo manual tradicional vs SurgiAuth AI</p>
+          <p class="text-xs text-slate-400">Comparativa de flujo manual tradicional vs AuraQx</p>
         </div>
       </div>
 
@@ -116,7 +116,7 @@ const totalAmountAuthorized = computed(() =>
         <div class="p-4 rounded-xl bg-slate-950/60 border border-emerald-500/30 space-y-2 glow-emerald">
           <span class="text-emerald-400 font-bold block flex items-center gap-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            SURGIAUTH AI EN TIEMPO REAL
+            AURAQX EN TIEMPO REAL
           </span>
           <div class="text-2xl font-black text-emerald-300">&lt; 3 Segundos</div>
           <p class="text-slate-300 font-sans text-[11px] leading-relaxed">

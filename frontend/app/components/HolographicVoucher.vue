@@ -204,7 +204,7 @@ const printVoucher = () => {
         </div>
 
         <div class="w-full pt-3 mt-3 border-t border-white/10 text-[10px] text-slate-400 font-mono">
-          <div>Validador: <span class="text-slate-200">SurgiAuth Core AI</span></div>
+          <div>Validador: <span class="text-slate-200">AuraQx Core AI</span></div>
           <div>Red Hospitalaria: <span class="text-emerald-400 font-bold">{{ resolution.financials.in_network ? 'CONVENIO EN RED' : 'FUERA DE RED' }}</span></div>
         </div>
       </div>

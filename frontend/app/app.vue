@@ -73,7 +73,7 @@ const installPWA = async () => {
           <div>
             <div class="flex items-center gap-2">
               <span class="text-base font-black tracking-tight text-white group-hover:text-cyan-300 transition-colors">
-                SurgiAuth <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">AI</span>
+                Aura<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">Qx</span>
               </span>
               <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/15 border border-cyan-500/30 text-cyan-400">
                 RETO 1

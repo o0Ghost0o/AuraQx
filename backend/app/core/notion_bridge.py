@@ -8,7 +8,7 @@ from app.config import settings
 from app.models.policy import CarenciaRule, InsuredPolicy
 from app.models.resolution import PreAuthResolution
 
-logger = logging.getLogger("surgiauth.notion")
+logger = logging.getLogger("auraqx.notion")
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 POLICIES_FILE = DATA_DIR / "demo_policies.json"

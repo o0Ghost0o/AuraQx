@@ -5,7 +5,7 @@ from openai import AsyncOpenAI
 
 from app.config import settings
 
-logger = logging.getLogger("surgiauth.llm")
+logger = logging.getLogger("auraqx.llm")
 
 
 class LLMClient:

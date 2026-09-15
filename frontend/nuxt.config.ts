@@ -16,8 +16,8 @@ export default defineNuxtConfig({
     strategies: 'generateSW',
     registerType: 'autoUpdate',
     manifest: {
-      name: 'SurgiAuth AI — Pre-Autorización Quirúrgica',
-      short_name: 'SurgiAuth',
+      name: 'AuraQx — Pre-Autorización Quirúrgica',
+      short_name: 'AuraQx',
       lang: 'es',
       description: 'Agente de IA para Pre-Autorización Quirúrgica en Tiempo Real (HackIAthon)',
       display: 'standalone',
@@ -71,7 +71,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'es' },
-      title: 'SurgiAuth AI — Pre-Autorización Quirúrgica en Tiempo Real',
+      title: 'AuraQx — Pre-Autorización Quirúrgica en Tiempo Real',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },

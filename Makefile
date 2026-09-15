@@ -4,7 +4,7 @@ SHELL := /usr/bin/env bash
 
 help:
 	@echo "=========================================================="
-	@echo "🩺 SurgiAuth AI — Makefile de Comandos"
+	@echo "🩺 AuraQx — Makefile de Comandos"
 	@echo "=========================================================="
 	@echo "Comandos disponibles:"
 	@echo "  make install        Instala dependencias de backend (uv) y frontend (bun)"
@@ -26,7 +26,7 @@ install:
 	@cd frontend && bun install
 
 dev:
-	@echo "🚀 Iniciando SurgiAuth AI (Backend :8000 + Frontend :3000)..."
+	@echo "🚀 Iniciando AuraQx (Backend :8000 + Frontend :3000)..."
 	@trap 'kill $$(jobs -p) 2>/dev/null || true' EXIT; \
 	(cd backend && uv run fastapi dev app/main.py --port 8000) & \
 	sleep 2; \

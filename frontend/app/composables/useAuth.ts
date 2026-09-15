@@ -9,18 +9,18 @@ export const useAuth = () => {
   const config = useRuntimeConfig()
   const apiBase = config.public.apiBase || 'http://localhost:8000'
 
-  const token = useCookie<string | null>('surgiauth_access_token', {
+  const token = useCookie<string | null>('auraqx_access_token', {
     maxAge: 60 * 15, // 15 minutos
     sameSite: 'lax',
   })
 
-  const refreshToken = useCookie<string | null>('surgiauth_refresh_token', {
+  const refreshToken = useCookie<string | null>('auraqx_refresh_token', {
     maxAge: 60 * 60 * 24 * 7, // 7 días
     sameSite: 'lax',
   })
 
-  const user = useState<UserProfile | null>('surgiauth_user', () => null)
-  const isRefreshing = useState<boolean>('surgiauth_is_refreshing', () => false)
+  const user = useState<UserProfile | null>('auraqx_user', () => null)
+  const isRefreshing = useState<boolean>('auraqx_is_refreshing', () => false)
 
   const isAuthenticated = computed(() => !!token.value)
 

@@ -1,4 +1,4 @@
-# 🩺 SurgiAuth AI — Agente de Pre-Autorización Quirúrgica en Tiempo Real
+# 🩺 AuraQx — Agente de Pre-Autorización Quirúrgica en Tiempo Real
 
 > **Solución para el Reto 1 del HackIAthon Viamatica & ADEN University**  
 > *"De días de espera burocrática a segundos de certeza clínica y financiera."*
@@ -7,8 +7,8 @@
 
 ## 📌 Entregables Oficiales del HackIAthon
 
-- **Enlace Público del Agente Funcional**: `https://surgiauth-ai.trycloudflare.com` *(o vía `make tunnel`)*
-- **Repositorio Git**: [GitHub: SurgiAuth-AI](https://github.com/pedrocarreras/pre_clasificacion)
+- **Enlace Público del Agente Funcional**: `https://auraqx.trycloudflare.com` *(o vía `make tunnel`)*
+- **Repositorio Git**: [GitHub: AuraQx](https://github.com/pedrocarreras/pre_clasificacion)
 - **Correo de Envío**: `hackiathon@viamatica.com`
 
 ---
@@ -18,7 +18,7 @@
 ### El Problema
 Actualmente, un paciente con indicación quirúrgica debe esperar entre **24 y 72 horas** para que su aseguradora apruebe el procedimiento. El hospital envía informes fragmentados por correo o papel; los auditores deben buscar manualmente la póliza, calcular meses de carencia y verificar requisitos médicos. Si falta una prueba, la solicitud se rechaza o posterga, poniendo en riesgo la salud del paciente y generando fricción entre el hospital y la aseguradora.
 
-### La Solución: SurgiAuth AI
+### La Solución: AuraQx
 Un agente agéntico multimodal que opera en **menos de 3 segundos**:
 1. **Ingestión Multimodal con IBM Docling**: Procesa informes médicos digitales o escaneados (PDFs/imágenes), reconociendo diagnósticos CIE-10, procedimientos CPT, urgencias y estudios adjuntos.
 2. **Consulta en Base de Datos de Notion**: Localiza la póliza del asegurado en Notion en tiempo real, recuperando deducibles, porcentaje de cobertura y reglas contractuales.
@@ -176,7 +176,7 @@ Tests validados:
 
 ## 📑 Configuración de Notion DB (Opcional)
 
-SurgiAuth AI funciona de inmediato con su almacén reactivo integrado. Si deseas conectar tu propio espacio de Notion, crea un archivo `.env` en `backend/` con:
+AuraQx funciona de inmediato con su almacén reactivo integrado. Si deseas conectar tu propio espacio de Notion, crea un archivo `.env` en `backend/` con:
 
 ```env
 NOTION_API_KEY=secret_tu_token_de_integracion
