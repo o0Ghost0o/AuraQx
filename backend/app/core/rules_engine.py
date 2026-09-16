@@ -1,6 +1,6 @@
 import re
 from datetime import datetime
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 from app.models.clinical import MedicalReport, UrgencyLevel
 from app.models.policy import InsuredPolicy
 from app.models.resolution import (
@@ -216,9 +216,13 @@ def calculate_financials(report: MedicalReport, policy: InsuredPolicy) -> Financ
     )
 
 
-def audit_preauthorization(report: MedicalReport, policy: InsuredPolicy) -> PreAuthResolution:
+def audit_preauthorization(
+    report: MedicalReport,
+    policy: InsuredPolicy,
+    existing_case_id: Optional[str] = None,
+) -> PreAuthResolution:
     import uuid
-    case_number = f"AUTH-2026-{uuid.uuid4().hex[:6].upper()}"
+    case_number = existing_case_id or f"AUTH-2026-{uuid.uuid4().hex[:6].upper()}"
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # 1. Comprobar vigencia de póliza

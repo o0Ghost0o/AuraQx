@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from app.config import settings
+from app.models.clinical import MedicalReport
 from app.models.policy import CarenciaRule, InsuredPolicy
 from app.models.resolution import PreAuthResolution
 
@@ -28,6 +29,7 @@ class NotionBridge:
         self.client = None
         self._local_policies: List[InsuredPolicy] = []
         self._local_cases: List[Dict[str, Any]] = []
+        self._reports_by_case: Dict[str, dict] = {}
 
         self._load_local_data()
         self._init_notion_client()
@@ -185,13 +187,23 @@ class NotionBridge:
 
         return self._local_policies
 
-    async def record_preauth_case(self, res: PreAuthResolution) -> Tuple[bool, Optional[str]]:
+    async def record_preauth_case(
+        self, res: PreAuthResolution, report: Optional[MedicalReport] = None
+    ) -> Tuple[bool, Optional[str]]:
         """Guarda la pre-autorización en el almacén local y en Notion si está configurado."""
         notion_url = None
         synced = False
 
+        if report:
+            self._reports_by_case[res.case_id] = report.model_dump()
+
         record_dict = res.model_dump()
-        self._local_cases.insert(0, record_dict)
+        for idx, existing in enumerate(self._local_cases):
+            if existing.get("case_id") == res.case_id:
+                self._local_cases[idx] = record_dict
+                break
+        else:
+            self._local_cases.insert(0, record_dict)
 
         # Guardar en archivo local
         try:
@@ -250,6 +262,16 @@ class NotionBridge:
 
     async def list_all_cases(self) -> List[Dict[str, Any]]:
         return self._local_cases
+
+    def get_report_by_case_id(self, case_id: str) -> Optional[MedicalReport]:
+        """Recupera el MedicalReport completo asociado a un case_id."""
+        data = self._reports_by_case.get(case_id)
+        if data:
+            try:
+                return MedicalReport(**data)
+            except Exception:
+                pass
+        return None
 
 
 # Singleton

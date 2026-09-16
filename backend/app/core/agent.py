@@ -169,7 +169,7 @@ class PreAuthAgent:
             )
         )
 
-        synced, notion_url = await notion_bridge.record_preauth_case(resolution)
+        synced, notion_url = await notion_bridge.record_preauth_case(resolution, report=report)
         resolution.notion_synced = synced
         resolution.notion_url = notion_url
 

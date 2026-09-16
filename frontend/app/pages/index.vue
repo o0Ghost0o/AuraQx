@@ -49,6 +49,7 @@ const currentStep = ref(0)
 const telemetryEvents = ref<any[]>([])
 const resolution = ref<any | null>(null)
 const errorAlert = ref<string | null>(null)
+const incompleteTableRef = ref<any | null>(null)
 
 // Cargar casos de demo
 onMounted(async () => {
@@ -178,30 +179,42 @@ const runPreauthAnalysis = async () => {
     errorAlert.value = err.message || 'Error en el pipeline agéntico'
   } finally {
     isAnalyzing.value = false
+    incompleteTableRef.value?.fetchIncompleteCases()
   }
 }
 
-// Subsanar documento faltante en vivo
+// Subsanar documento faltante en vivo (1-Click)
 const handleResolveMissingDoc = async (docType: string, fileName: string) => {
   try {
     const payload = {
       ...currentReport.value,
+      case_id: resolution.value?.case_id,
       resolved_doc_type: docType,
       uploaded_file_name: fileName,
     }
 
-    const updatedRes = await fetchWithAuth('/api/preauth/submit-missing-doc', {
+    const updatedRes = await fetchWithAuth<any>('/api/preauth/submit-missing-doc', {
       method: 'POST',
       body: payload,
     })
 
     resolution.value = updatedRes
-    // Actualizar también en el reporte actual
+
+    // Actualizar y acumular en el reporte actual para evitar pérdida en subsanaciones posteriores
+    let found = false
     for (const att of currentReport.value.attachments) {
       if (att.doc_type.toLowerCase() === docType.toLowerCase()) {
         att.is_present = true
         att.name = fileName
+        found = true
       }
+    }
+    if (!found) {
+      currentReport.value.attachments.push({
+        name: fileName,
+        doc_type: docType,
+        is_present: true,
+      })
     }
 
     telemetryEvents.value.push({
@@ -211,9 +224,88 @@ const handleResolveMissingDoc = async (docType: string, fileName: string) => {
       detail: `Se adjuntó ${fileName}. Nueva resolución: ${updatedRes.status}`,
       timestamp: new Date().toLocaleTimeString(),
     })
+
+    incompleteTableRef.value?.fetchIncompleteCases()
   } catch (err: any) {
     console.error('Error resolving missing document:', err)
   }
+}
+
+// Subsanar subiendo un archivo propio (PDF o Imagen)
+const handleUploadRealMissingFile = async (docType: string, file: File) => {
+  try {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('case_id', resolution.value?.case_id || '')
+    formData.append('patient_id', currentReport.value.patient_id)
+    formData.append('doc_type', docType)
+    formData.append('report_json', JSON.stringify(currentReport.value))
+
+    const updatedRes = await fetchWithAuth<any>('/api/preauth/upload-missing-file', {
+      method: 'POST',
+      body: formData,
+    })
+
+    resolution.value = updatedRes
+
+    // Acumular en el reporte actual
+    let found = false
+    for (const att of currentReport.value.attachments) {
+      if (att.doc_type.toLowerCase() === docType.toLowerCase()) {
+        att.is_present = true
+        att.name = file.name
+        found = true
+      }
+    }
+    if (!found) {
+      currentReport.value.attachments.push({
+        name: file.name,
+        doc_type: docType,
+        is_present: true,
+      })
+    }
+
+    telemetryEvents.value.push({
+      step: 6,
+      title: 'Archivo Propio Auditado por Docling',
+      status: updatedRes.status === 'PRE_APROBADO' ? 'success' : 'warning',
+      detail: `Se procesó ${file.name}. Nueva resolución: ${updatedRes.status}`,
+      timestamp: new Date().toLocaleTimeString(),
+    })
+
+    incompleteTableRef.value?.fetchIncompleteCases()
+  } catch (err: any) {
+    console.error('Error uploading missing file:', err)
+  }
+}
+
+// Seleccionar un caso incompleto de la bandeja asíncrona
+const handleSelectIncompleteCase = (caseItem: any) => {
+  resolution.value = caseItem
+  const matched = demoCases.value.find((c: any) => c.report?.patient_id === caseItem.patient_id)
+  if (matched) {
+    selectedCase.value = matched
+    currentReport.value = JSON.parse(JSON.stringify(matched.report))
+  } else {
+    currentReport.value = {
+      patient_name: caseItem.patient_name,
+      patient_id: caseItem.patient_id,
+      patient_age: 48,
+      patient_gender: 'M',
+      hospital_name: caseItem.hospital_name,
+      treating_physician: 'Dr. Médico Tratante',
+      diagnosis_icd10: 'Diagnóstico Quirúrgico',
+      procedure_name: caseItem.procedure_name,
+      procedure_cpt: '49505',
+      urgency: 'ELECTIVA',
+      request_date: caseItem.request_date || new Date().toISOString().split('T')[0],
+      estimated_cost: caseItem.financials?.estimated_total || 2100.0,
+      clinical_summary: caseItem.clinical_justification || '',
+      attachments: [],
+    }
+  }
+
+  window.scrollTo({ top: 350, behavior: 'smooth' })
 }
 </script>
 
@@ -430,8 +522,16 @@ const handleResolveMissingDoc = async (docType: string, fileName: string) => {
           :missing-docs="resolution.missing_documents"
           :current-report="currentReport"
           @resolve-doc="handleResolveMissingDoc"
+          @upload-file="handleUploadRealMissingFile"
         />
       </div>
     </div>
+
+    <!-- Bandeja de Casos Quirúrgicos Incompletos / Por Subsanar (Asíncrono) -->
+    <IncompleteCasesTable
+      ref="incompleteTableRef"
+      @select-case="handleSelectIncompleteCase"
+      class="mt-8"
+    />
   </div>
 </template>
