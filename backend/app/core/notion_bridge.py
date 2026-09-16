@@ -52,7 +52,7 @@ class NotionBridge:
         if self.api_key and (self.policies_db_id or self.preauths_db_id):
             try:
                 from notion_client import Client
-                self.client = Client(auth=self.api_key)
+                self.client = Client(auth=self.api_key, notion_version="2022-06-28")
                 logger.info("Notion Client inicializado con API Key provista.")
             except Exception as e:
                 logger.warning("No se pudo inicializar Notion Client: %s. Operando en modo mock local.", e)
@@ -69,15 +69,24 @@ class NotionBridge:
         # Si tenemos cliente de Notion y DB ID de pólizas, intentar consulta remota
         if self.client and self.policies_db_id:
             try:
-                query = self.client.databases.query(
-                    database_id=self.policies_db_id,
-                    filter={
-                        "property": "Cédula",
-                        "rich_text": {
-                            "equals": clean_id
-                        }
+                filter_payload = {
+                    "property": "Cédula",
+                    "rich_text": {
+                        "equals": clean_id
                     }
-                )
+                }
+                if hasattr(self.client, "databases") and hasattr(self.client.databases, "query"):
+                    query = self.client.databases.query(
+                        database_id=self.policies_db_id,
+                        filter=filter_payload
+                    )
+                else:
+                    query = self.client.request(
+                        path=f"databases/{self.policies_db_id}/query",
+                        method="POST",
+                        body={"filter": filter_payload}
+                    )
+
                 results = query.get("results", [])
                 if results:
                     page = results[0]
@@ -88,6 +97,15 @@ class NotionBridge:
                     start_date = props.get("Fecha Inicio", {}).get("date", {}).get("start", "2025-01-01")
                     plan = props.get("Plan", {}).get("select", {}).get("name", "Plan Oro")
                     status_pol = props.get("Estado", {}).get("select", {}).get("name", "Activa")
+
+                    # Vincular reglas contractuales de carencia y exclusiones predeterminadas
+                    carencia_rules = []
+                    exclusions = []
+                    for pol in self._local_policies:
+                        if pol.patient_id.strip() == clean_id:
+                            carencia_rules = pol.carencia_rules
+                            exclusions = pol.exclusions
+                            break
 
                     return InsuredPolicy(
                         policy_number=pol_num,
@@ -102,6 +120,8 @@ class NotionBridge:
                         coverage_percent_out_network=60.0,
                         network_hospitals=["Hospital Metropolitano", "Clínica Guayaquil", "Clínica Kennedy"],
                         notion_page_id=page.get("id"),
+                        carencia_rules=carencia_rules,
+                        exclusions=exclusions,
                     )
             except Exception as e:
                 logger.warning("Error consultando póliza en Notion API (%s). Recurriendo al almacén local.", e)
@@ -113,6 +133,56 @@ class NotionBridge:
         return None
 
     async def list_all_policies(self) -> List[InsuredPolicy]:
+        if self.client and self.policies_db_id:
+            try:
+                if hasattr(self.client, "databases") and hasattr(self.client.databases, "query"):
+                    query = self.client.databases.query(database_id=self.policies_db_id)
+                else:
+                    query = self.client.request(
+                        path=f"databases/{self.policies_db_id}/query",
+                        method="POST",
+                        body={}
+                    )
+                results = query.get("results", [])
+                if results:
+                    remote_policies = []
+                    for page in results:
+                        props = page.get("properties", {})
+                        cedula = props.get("Cédula", {}).get("rich_text", [{}])[0].get("plain_text", "")
+                        pol_num = props.get("Número de Póliza", {}).get("rich_text", [{}])[0].get("plain_text", "POL-NOTION")
+                        name = props.get("Nombre", {}).get("title", [{}])[0].get("plain_text", "Asegurado")
+                        start_date = props.get("Fecha Inicio", {}).get("date", {}).get("start", "2025-01-01")
+                        plan = props.get("Plan", {}).get("select", {}).get("name", "Plan Oro")
+                        status_pol = props.get("Estado", {}).get("select", {}).get("name", "Activa")
+
+                        carencia_rules = []
+                        exclusions = []
+                        for pol in self._local_policies:
+                            if pol.patient_id.strip() == cedula.strip():
+                                carencia_rules = pol.carencia_rules
+                                exclusions = pol.exclusions
+                                break
+
+                        remote_policies.append(InsuredPolicy(
+                            policy_number=pol_num,
+                            patient_id=cedula,
+                            patient_name=name,
+                            plan_tier=plan,
+                            start_date=start_date,
+                            status=status_pol,
+                            annual_deductible=250.0,
+                            deductible_met=0.0,
+                            coverage_percent_in_network=80.0,
+                            coverage_percent_out_network=60.0,
+                            network_hospitals=["Hospital Metropolitano", "Clínica Guayaquil", "Clínica Kennedy"],
+                            notion_page_id=page.get("id"),
+                            carencia_rules=carencia_rules,
+                            exclusions=exclusions,
+                        ))
+                    return remote_policies
+            except Exception as e:
+                logger.warning("Error listando pólizas desde Notion (%s). Recurriendo al almacén local.", e)
+
         return self._local_policies
 
     async def record_preauth_case(self, res: PreAuthResolution) -> Tuple[bool, Optional[str]]:

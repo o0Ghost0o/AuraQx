@@ -3,8 +3,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       - AUTH_USERNAME=auditor_clinico
       - AUTH_PASSWORD=hackiathon2026
@@ -21,8 +21,8 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       - NUXT_PUBLIC_API_BASE=http://backend:8000
     depends_on:
