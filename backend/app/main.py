@@ -41,10 +41,12 @@ app = FastAPI(
 # Configuración de CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # En hackathon permitimos conexiones desde PWA Nuxt y túneles
+    allow_origins=settings.cors_origins,
+    allow_origin_regex=r"https?://.*\.vertexdc\.com|https?://.*\.trycloudflare\.com",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
 )
 
 # Inclusión de Routers

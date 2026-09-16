@@ -5,9 +5,45 @@ export interface UserProfile {
   organization: string
 }
 
+/**
+ * Resuelve la URL base de la API de forma dinámica:
+ * - En el navegador (client-side), si la configuración apunta al hostname interno de Docker ('backend:8000')
+ *   o si el usuario está accediendo desde un dominio público (*.vertexdc.com o HTTPS),
+ *   se redirige automáticamente a la API pública externa 'https://api-auraqx.vertexdc.com'.
+ * - En localhost/127.0.0.1, mantiene 'http://localhost:8000'.
+ */
+export const resolveApiBase = (configuredBase?: string): string => {
+  let base = (configuredBase || '').trim()
+
+  if (import.meta.client && typeof window !== 'undefined') {
+    const { hostname, protocol } = window.location
+
+    // En entorno local de desarrollo
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      return base.includes('backend:8000') ? 'http://localhost:8000' : (base || 'http://localhost:8000')
+    }
+
+    // En el navegador en producción / dominios externos:
+    // 'backend:8000' es inaccesible fuera de la red interna de Docker.
+    if (!base || base.includes('backend:8000') || base.includes('backend') || hostname.includes('vertexdc.com')) {
+      return 'https://api-auraqx.vertexdc.com'
+    }
+
+    // Si la web carga por HTTPS, forzar HTTPS en la API para evitar bloqueo de Mixed Content
+    if (protocol === 'https:' && base.startsWith('http://')) {
+      if (base.includes('vertexdc.com')) {
+        return base.replace('http://', 'https://')
+      }
+      return 'https://api-auraqx.vertexdc.com'
+    }
+  }
+
+  return base || 'https://api-auraqx.vertexdc.com'
+}
+
 export const useAuth = () => {
   const config = useRuntimeConfig()
-  const apiBase = config.public.apiBase || 'http://localhost:8000'
+  const apiBase = resolveApiBase(config.public.apiBase)
 
   const token = useCookie<string | null>('auraqx_access_token', {
     maxAge: 60 * 15, // 15 minutos
