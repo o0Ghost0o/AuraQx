@@ -13,10 +13,12 @@ import {
   DollarSign,
   User,
   Clock,
-  Shield
+  Shield,
+  Compass
 } from 'lucide-vue-next'
 
 const { fetchWithAuth, token, apiBase } = useAuth()
+const { startTour } = useTour()
 
 // Estado
 const demoCases = ref<any[]>([])
@@ -61,6 +63,17 @@ onMounted(async () => {
     }
   } catch (err) {
     console.error('Error fetching demo cases:', err)
+  }
+
+  // Sugerir tour interactivo en primera visita tras 1.2s
+  if (import.meta.client) {
+    const hasSeenTour = localStorage.getItem('auraqx_tour_seen')
+    if (!hasSeenTour) {
+      setTimeout(() => {
+        startTour()
+        localStorage.setItem('auraqx_tour_seen', 'true')
+      }, 1200)
+    }
   }
 })
 
@@ -312,53 +325,72 @@ const handleSelectIncompleteCase = (caseItem: any) => {
 <template>
   <div class="space-y-6 animate-fadeIn">
     <!-- Hero Header -->
-    <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 relative overflow-hidden">
+    <div id="hero-header" class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10 relative overflow-hidden">
       <div class="absolute -right-16 -top-16 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
       
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-3">
-          <Zap class="w-3.5 h-3.5 animate-pulse" />
-          <span>Viamatica & ADEN HackIAthon 2026 • Reto 1</span>
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-3">
+            <Zap class="w-3.5 h-3.5 animate-pulse" />
+            <span>Viamatica & ADEN HackIAthon 2026 • Reto 1</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-2">
+            Agente de Pre-Autorización Quirúrgica en <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400">Tiempo Real</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            De días de espera a segundos de certeza. Ingesta el informe médico con <strong>IBM Docling</strong>, consulta la póliza en <strong>Notion DB</strong>, audita períodos de carencia y emite la pre-aprobación o checklist de faltantes de forma instantánea.
+          </p>
         </div>
-        <h1 class="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight mb-2">
-          Agente de Pre-Autorización Quirúrgica en <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-emerald-400">Tiempo Real</span>
-        </h1>
-        <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
-          De días de espera a segundos de certeza. Ingesta el informe médico con <strong>IBM Docling</strong>, consulta la póliza en <strong>Notion DB</strong>, audita períodos de carencia y emite la pre-aprobación o checklist de faltantes de forma instantánea.
-        </p>
+
+        <!-- Botón Tour Guiado con driver.js -->
+        <button
+          @click="startTour"
+          class="shrink-0 px-4 py-2.5 rounded-2xl bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-emerald-500/20 hover:from-cyan-500/30 hover:to-emerald-500/30 border border-cyan-400/40 text-cyan-300 text-xs font-bold flex items-center gap-2 shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all cursor-pointer"
+          title="Iniciar recorrido guiado paso a paso con driver.js"
+        >
+          <Compass class="w-4 h-4 text-cyan-400 animate-spin-slow" />
+          <span>Tour Guiado 🚀</span>
+        </button>
       </div>
     </div>
 
     <!-- 1-Click Demo Selector Bar -->
-    <GlassCard>
-      <CaseSelector
-        :cases="demoCases"
-        :selected-case-id="selectedCase?.id || null"
-        @select="selectCase"
-      />
-    </GlassCard>
+    <div id="case-selector">
+      <GlassCard>
+        <CaseSelector
+          :cases="demoCases"
+          :selected-case-id="selectedCase?.id || null"
+          @select="selectCase"
+        />
+      </GlassCard>
+    </div>
 
     <!-- Main Working Grid: Clinical Form & Ingestion vs Telemetry & Voucher -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
       <!-- Columna Izquierda: Formulario Quirúrgico & Docling Uploader (5 cols) -->
       <div class="lg:col-span-5 space-y-5">
         <!-- Subida Multimodal con IBM Docling -->
-        <GlassCard>
-          <div class="flex items-center gap-2 mb-3">
-            <Stethoscope class="w-4 h-4 text-cyan-400" />
-            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">Ingestión de Documento Clínico</h3>
-          </div>
-          <DocumentDropzone @file-uploaded="handleDoclingUpload" />
-        </GlassCard>
+        <div id="docling-dropzone">
+          <GlassCard>
+            <div class="flex items-center gap-2 mb-3">
+              <Stethoscope class="w-4 h-4 text-cyan-400" />
+              <h3 class="text-xs font-bold uppercase tracking-wider text-slate-200">Ingestión de Documento Clínico</h3>
+            </div>
+            <DocumentDropzone @file-uploaded="handleDoclingUpload" />
+          </GlassCard>
+        </div>
 
         <!-- Expediente del Caso & Paquete Descargable (.ZIP) -->
-        <CasePackageViewer
-          :selected-case="selectedCase"
-          @process-doc="handleProcessDocFromPackage"
-        />
+        <div id="case-package-viewer">
+          <CasePackageViewer
+            :selected-case="selectedCase"
+            @process-doc="handleProcessDocFromPackage"
+          />
+        </div>
 
         <!-- Formulario Clínico Parametrizable -->
-        <GlassCard>
+        <div id="clinical-form">
+          <GlassCard>
           <div class="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
             <div class="flex items-center gap-2">
               <Activity class="w-4 h-4 text-cyan-400" />
@@ -484,6 +516,7 @@ const handleSelectIncompleteCase = (caseItem: any) => {
 
             <!-- Botón de Ejecución Principal -->
             <button
+              id="run-audit-btn"
               @click="runPreauthAnalysis"
               :disabled="isAnalyzing"
               class="w-full mt-2 py-3 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_0_25px_rgba(56,189,248,0.35)] transition-all disabled:opacity-50"
@@ -493,6 +526,7 @@ const handleSelectIncompleteCase = (caseItem: any) => {
             </button>
           </div>
         </GlassCard>
+        </div>
       </div>
 
       <!-- Columna Derecha: Telemetría Radar, Voucher Holográfico y Portal de Faltantes (7 cols) -->
@@ -504,34 +538,43 @@ const handleSelectIncompleteCase = (caseItem: any) => {
         </div>
 
         <!-- Radar de Telemetría Agéntica SSE -->
-        <AgentTelemetryRadar
-          :events="telemetryEvents"
-          :current-step="currentStep"
-          :is-running="isAnalyzing"
-        />
+        <div id="telemetry-radar">
+          <AgentTelemetryRadar
+            :events="telemetryEvents"
+            :current-step="currentStep"
+            :is-running="isAnalyzing"
+          />
+        </div>
 
         <!-- Voucher Holográfico de Resolución -->
-        <HolographicVoucher
-          v-if="resolution"
-          :resolution="resolution"
-        />
+        <div id="voucher-section" v-if="resolution">
+          <HolographicVoucher
+            :resolution="resolution"
+          />
+        </div>
 
         <!-- Portal de Documentos Faltantes (Si aplica) -->
-        <MissingDocsPortal
-          v-if="resolution && resolution.status === 'DOCUMENTOS_FALTANTES'"
-          :missing-docs="resolution.missing_documents"
-          :current-report="currentReport"
-          @resolve-doc="handleResolveMissingDoc"
-          @upload-file="handleUploadRealMissingFile"
-        />
+        <div id="missing-docs-portal" v-if="resolution && resolution.status === 'DOCUMENTOS_FALTANTES'">
+          <MissingDocsPortal
+            :missing-docs="resolution.missing_documents"
+            :current-report="currentReport"
+            @resolve-doc="handleResolveMissingDoc"
+            @upload-file="handleUploadRealMissingFile"
+          />
+        </div>
       </div>
     </div>
 
     <!-- Bandeja de Casos Quirúrgicos Incompletos / Por Subsanar (Asíncrono) -->
-    <IncompleteCasesTable
-      ref="incompleteTableRef"
-      @select-case="handleSelectIncompleteCase"
-      class="mt-8"
-    />
+    <div id="incomplete-cases-tray">
+      <IncompleteCasesTable
+        ref="incompleteTableRef"
+        @select-case="handleSelectIncompleteCase"
+        class="mt-8"
+      />
+    </div>
+
+    <!-- Sección de Documentación Técnica Completa -->
+    <TechnicalDocumentation class="mt-8" />
   </div>
 </template>

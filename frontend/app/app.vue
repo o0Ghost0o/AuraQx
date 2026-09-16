@@ -10,10 +10,12 @@ import {
   Download,
   Github,
   CheckCircle2,
-  Stethoscope
+  Stethoscope,
+  Compass
 } from 'lucide-vue-next'
 
 const { isAuthenticated, user, demoLogin, initUser } = useAuth()
+const { startTour } = useTour()
 const isAuthModalOpen = ref(false)
 const pwaInstallPrompt = ref<any>(null)
 const isInstalled = ref(false)
@@ -115,6 +117,16 @@ const installPWA = async () => {
 
         <!-- Right Controls -->
         <div class="flex items-center gap-2.5">
+          <!-- Tour Guiado button -->
+          <button
+            @click="startTour"
+            class="px-3 py-1.5 rounded-xl border border-cyan-500/40 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-mono font-medium flex items-center gap-1.5 transition-all cursor-pointer shadow-sm hover:shadow-[0_0_12px_rgba(56,189,248,0.25)]"
+            title="Iniciar recorrido guiado interactivo de AuraQx"
+          >
+            <Compass class="w-3.5 h-3.5 text-cyan-400" />
+            <span class="hidden sm:inline">Tour Guiado</span>
+          </button>
+
           <!-- Install PWA button -->
           <button
             v-if="pwaInstallPrompt"
