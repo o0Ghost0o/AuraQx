@@ -1,0 +1,68 @@
+{
+  "terms_and_conditions": {
+    "version": "v2026.2",
+    "last_updated": "2026-09-16",
+    "title": "Términos y Condiciones de Uso — Sistema de Pre-Autorización Quirúrgica AuraQx",
+    "jurisdiction": "Ecuador / Red Hospitalaria Acreditada",
+    "clauses": [
+      {
+        "id": "TC-01",
+        "title": "Legitimidad Médica y Ámbito Clínico",
+        "rule": "Las solicitudes de pre-autorización deben ampararse en diagnósticos CIE-10 válidos y procedimientos quirúrgicos reconocidos. Quedan explícitamente excluidos los procedimientos exclusivamente cosméticos o experimentales no cubiertos por el plan.",
+        "mandatory": true
+      },
+      {
+        "id": "TC-02",
+        "title": "Veracidad Documental y Condición Antifraude",
+        "rule": "La emisión de pre-autorización se basa en los informes y estudios aportados. Todo falseamiento, alteración o suplantación documental anula retroactivamente cualquier pre-aprobación emitida.",
+        "mandatory": true
+      },
+      {
+        "id": "TC-03",
+        "title": "Convenio de Red y Cobertura Financiera",
+        "rule": "El cálculo de cobertura preferente (ej. 80/20) requiere que el hospital o clínica solicitante pertenezca a la red de prestadores acreditados de la aseguradora para el plan del paciente.",
+        "mandatory": true
+      },
+      {
+        "id": "TC-04",
+        "title": "Cumplimiento de Carencias y Excepción de Emergencia",
+        "rule": "El paciente debe cumplir con los meses de antigüedad continua requeridos para el procedimiento según su póliza, salvo emergencias vitales debidamente sustentadas que gocen de carencia cero.",
+        "mandatory": true
+      }
+    ],
+    "full_text": "### Términos y Condiciones de Uso — AuraQx\n\n1. **Ámbito de Aplicación**: El presente sistema agéntico procesa solicitudes quirúrgicas para afiliados de aseguradoras autorizadas.\n2. **Validez**: Toda resolución emitida se encuentra supeditada a la veracidad de la historia clínica digital provista.\n3. **Exclusiones Taxativas**: No se admitirán solicitudes para cirugías estéticas puras o procedimientos no autorizados por la autoridad sanitaria.\n4. **Red de Cobertura**: Los beneficios de liquidación directa aplican en centros hospitalarios con convenio vigente."
+  },
+  "privacy_policy": {
+    "version": "v2026.2",
+    "last_updated": "2026-09-16",
+    "title": "Política de Privacidad, Confidencialidad y Protección de Datos de Salud (PHI)",
+    "legal_framework": "Ley Orgánica de Protección de Datos Personales (LOPDP Ecuador) & Estándar HIPAA",
+    "clauses": [
+      {
+        "id": "PP-01",
+        "title": "Principio de Minimización y Uso Exclusivo",
+        "rule": "Los datos clínicos, diagnósticos e identificadores del paciente solo serán utilizados para la auditoría y emisión de la pre-autorización correspondiente, prohibiéndose cualquier otro uso secundario.",
+        "mandatory": true
+      },
+      {
+        "id": "PP-02",
+        "title": "Protección de Información de Salud Protegida (PHI)",
+        "rule": "La información médica goza de reserva absoluta bajo secreto profesional y normativa de protección de datos sensibles. Solo auditores médicos autenticados pueden acceder a los expedientes.",
+        "mandatory": true
+      },
+      {
+        "id": "PP-03",
+        "title": "Cifrado de Transmisión y Trazabilidad",
+        "rule": "Toda la comunicación de datos se efectúa bajo canales cifrados TLS/HTTPS y autenticación JWT. Cada interacción del agente queda registrada en logs de auditoría inmutables.",
+        "mandatory": true
+      },
+      {
+        "id": "PP-04",
+        "title": "Consentimiento Informado del Paciente",
+        "rule": "El médico u hospital emisor certifica contar con el consentimiento del asegurado para el tratamiento y evaluación digital de su caso clínico ante la aseguradora.",
+        "mandatory": true
+      }
+    ],
+    "full_text": "### Política de Privacidad y Protección de Datos (PHI) — AuraQx\n\n1. **Compromiso Ético**: En AuraQx tratamos la información de salud como dato de especial protección bajo la LOPDP y normativas sanitarias internacionales.\n2. **Seguridad Técnica**: Implementamos controles de acceso por roles, cifrado en reposo y en tránsito, y expiración estricta de tokens.\n3. **Derechos del Titular**: El asegurado puede solicitar en cualquier momento información sobre las pre-autorizaciones emitidas a su nombre.\n4. **Confidencialidad Médica**: Los agentes de IA operan bajo parámetros cerrados sin compartir información médica a repositorios públicos."
+  }
+}

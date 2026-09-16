@@ -46,6 +46,16 @@ class TelemetryEvent(BaseModel):
     timestamp: str
 
 
+class ModerationAuditResult(BaseModel):
+    is_compliant: bool = True
+    terms_compliant: bool = True
+    privacy_compliant: bool = True
+    terms_version: str = "v2026.2"
+    privacy_version: str = "v2026.2"
+    explanation: str = "Conforme a políticas y LOPDP"
+    verified_clauses: List[str] = Field(default_factory=list)
+
+
 class PreAuthResolution(BaseModel):
     case_id: str
     status: ResolutionStatus
@@ -59,6 +69,7 @@ class PreAuthResolution(BaseModel):
     financials: FinancialBreakdown
     missing_documents: List[MissingDocumentRequirement] = Field(default_factory=list)
     clinical_justification: str
+    compliance_audit: Optional[ModerationAuditResult] = None
     authorization_code: Optional[str] = None
     qr_data: str
     created_at: str

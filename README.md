@@ -5,11 +5,15 @@
 
 ---
 
-## 📌 Entregables Oficiales del HackIAthon
+## 📌 Entregables Oficiales del HackIAthon (Reto Inicial)
 
-- **Enlace Público del Agente Funcional**: `https://auraqx.trycloudflare.com` *(o vía `make tunnel`)*
-- **Repositorio Git**: [GitHub: AuraQx](https://github.com/o0Ghost0o/AuraQx)
-- **Correo de Envío**: `hackiathon@viamatica.com`
+* **Enlace Público de la Aplicación en Ejecución (PWA)**: [`https://auraqx.vertexdc.com`](https://auraqx.vertexdc.com)
+* **API Pública del Backend (FastAPI Swagger Docs)**: [`https://api-auraqx.vertexdc.com/docs`](https://api-auraqx.vertexdc.com/docs)
+* **Repositorio de Código Fuente**: [GitHub: AuraQx (o0Ghost0o/AuraQx)](https://github.com/o0Ghost0o/AuraQx)
+* **PDF de Herramientas de IA Utilizadas**: [AuraQx_Herramientas_de_IA_Utilizadas.pdf](docs/entregables/AuraQx_Herramientas_de_IA_Utilizadas.pdf) | [Versión Markdown](docs/entregables/HERRAMIENTAS_DE_IA_UTILIZADAS.md)
+* **Aviso de Privacidad y Cumplimiento LOPDP Viamatica S.A.**: [AVISO_PRIVACIDAD_VIAMATICA.md](docs/legal/AVISO_PRIVACIDAD_VIAMATICA.md)
+* **Bases y Entregables Oficiales**: [hackIAthon-Panama-Bases-y-Entregables.pdf](docs/bases/hackIAthon-Panama-Bases-y-Entregables.pdf)
+* **Correo de Envío**: `hackiathon@viamatica.com`
 
 ---
 
