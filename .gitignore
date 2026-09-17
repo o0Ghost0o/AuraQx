@@ -43,6 +43,8 @@ dist/
 .cache/
 bun.lockb
 .npm/
+playwright-report/
+test-results/
 
 # OS
 .DS_Store

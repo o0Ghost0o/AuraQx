@@ -19,11 +19,9 @@ const fileInputs = ref<Record<string, HTMLInputElement | null>>({})
 const handleQuickResolve = (docType: string, title: string) => {
   uploadingDoc.value = docType
   uploadingType.value = 'quick'
-  setTimeout(() => {
-    emit('resolve-doc', docType, `${title.replace(/\s+/g, '_')}_Firmado.pdf`)
-    uploadingDoc.value = null
-    uploadingType.value = null
-  }, 600)
+  emit('resolve-doc', docType, `${title.replace(/\s+/g, '_')}_Firmado.pdf`)
+  uploadingDoc.value = null
+  uploadingType.value = null
 }
 
 const triggerFileInput = (docType: string) => {

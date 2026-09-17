@@ -199,21 +199,7 @@ const runPreauthAnalysis = async () => {
 // Subsanar documento faltante en vivo (1-Click)
 const handleResolveMissingDoc = async (docType: string, fileName: string) => {
   try {
-    const payload = {
-      ...currentReport.value,
-      case_id: resolution.value?.case_id,
-      resolved_doc_type: docType,
-      uploaded_file_name: fileName,
-    }
-
-    const updatedRes = await fetchWithAuth<any>('/api/preauth/submit-missing-doc', {
-      method: 'POST',
-      body: payload,
-    })
-
-    resolution.value = updatedRes
-
-    // Actualizar y acumular en el reporte actual para evitar pérdida en subsanaciones posteriores
+    // Actualizar y acumular inmediatamente en el reporte actual para evitar pérdida en subsanaciones posteriores
     let found = false
     for (const att of currentReport.value.attachments) {
       if (att.doc_type.toLowerCase() === docType.toLowerCase()) {
@@ -229,6 +215,20 @@ const handleResolveMissingDoc = async (docType: string, fileName: string) => {
         is_present: true,
       })
     }
+
+    const payload = {
+      ...currentReport.value,
+      case_id: resolution.value?.case_id,
+      resolved_doc_type: docType,
+      uploaded_file_name: fileName,
+    }
+
+    const updatedRes = await fetchWithAuth<any>('/api/preauth/submit-missing-doc', {
+      method: 'POST',
+      body: payload,
+    })
+
+    resolution.value = updatedRes
 
     telemetryEvents.value.push({
       step: 6,

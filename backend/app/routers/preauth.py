@@ -192,6 +192,16 @@ async def submit_missing_document(
             )
         )
 
+    # Si existe reporte previo guardado para este caso, acumular documentos ya subsanados previamente
+    if req.case_id and req.case_id in notion_bridge._reports_by_case:
+        prev_report_dict = notion_bridge._reports_by_case[req.case_id]
+        prev_attachments = prev_report_dict.get("attachments", [])
+        existing_types = {att.doc_type.lower() for att in req.attachments if att.is_present}
+        for prev_att in prev_attachments:
+            if prev_att.get("is_present") and prev_att.get("doc_type", "").lower() not in existing_types:
+                req.attachments.append(DocumentAttachment(**prev_att))
+                existing_types.add(prev_att.get("doc_type", "").lower())
+
     policy = await notion_bridge.get_policy_by_patient_id(req.patient_id)
     if not policy:
         raise HTTPException(status_code=404, detail="Póliza no encontrada.")
