@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
-    { name = "Pedro Carreras", email = "pcarreras@vertexdc.com" }
+    { name = "Pedro Carreras", email = "pcarreras@vertexdc.com" },
+    { name = "Alek Rutherford", email = "alekissac@gmail.com" }
 ]
 requires-python = ">=3.12"
 dependencies = [

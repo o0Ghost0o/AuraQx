@@ -214,5 +214,7 @@ OPENAI_MODEL=meta-llama/Llama-3.3-70B-Instruct-Turbo
 ---
 
 ## 👥 Equipo y Autores
-- **Desarrollador Principal**: Pedro Carreras (`pcarreras@vertexdc.com`)
+- **Equipo de Desarrollo**:
+  - Pedro Carreras (`pcarreras@vertexdc.com`)
+  - Alek Rutherford (`alekissac@gmail.com`)
 - **HackIAthon**: Viamatica & ADEN University 2026
